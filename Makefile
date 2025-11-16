@@ -10,17 +10,17 @@ OBJCOPY  := xenon-objcopy
 STRIP    := xenon-strip
 
 # --- Flags ---
-MACHDEP = -DXENON -m32 -maltivec -fno-pic -mpowerpc64 -mhard-float
+MACHDEP = -DXENON -m32 -maltivec -fno-pic -mpowerpc64 -mhard-float -L$(DEVKITXENON)/xenon/lib/32
 
 CFLAGS  := -g -O2 -Wall $(MACHDEP) -I$(LIBXENON_INC)
-LDFLAGS := -g $(MACHDEP) -T $(LDSCRIPT) -L$(LIBXENON_LIB)
+LDFLAGS := -g $(MACHDEP) -T $(LDSCRIPT) -L$(LIBXENON_LIB) 
 
 LIBS := -lxenon
 
 # --- Build rules ---
 
 %.o: %.c
-    @echo [CC] $(notdir $<)
+	@echo [CC] $(notdir $<)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 %.elf: %.o
